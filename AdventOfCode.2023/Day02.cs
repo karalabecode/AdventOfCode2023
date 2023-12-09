@@ -14,18 +14,16 @@ public partial class Day02
     
     private static Regex RoundRegex = GetRoundRegex();
 
-    public static string? SolvePart1(string input)
+    public static int? SolvePart1(string input)
         => Parse(input)
             .Where(g => g.Rounds.All(IsPossible))
             .Select(g => g.Id)
-            .Sum()
-            .ToString();
+            .Sum();
 
-    public static string? SolvePart2(string input)
+    public static int? SolvePart2(string input)
         => Parse(input)
             .Select(g => PowerOf(GetMinimumAmounts(g.Rounds)))
-            .Sum()
-            .ToString();
+            .Sum();
 
     public static IEnumerable<Game> Parse(string input)
         => input.Split("\n").Select(ParseLine);

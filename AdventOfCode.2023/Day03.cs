@@ -13,9 +13,9 @@ public partial class Day03
     private static Regex SymbolRegex = GetSymbolRegex();
     private static Regex NumberRegex = GetNumberRegex();
 
-    public static string? SolvePart1(IEnumerable<string> input) => GetPartNumbers(input).Select(n => n.Value).Sum().ToString();
+    public static int? SolvePart1(IEnumerable<string> input) => GetPartNumbers(input).Select(n => n.Value).Sum();
 
-    public static string? SolvePart2(IEnumerable<string> input) => GetGearRatios(input).Sum().ToString();
+    public static long? SolvePart2(IEnumerable<string> input) => GetGearRatios(input).Sum();
 
     public static IEnumerable<Number> GetPartNumbers(IEnumerable<string> input)
     {

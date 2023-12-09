@@ -9,14 +9,13 @@ public partial class Day04
 {
     private static Regex NumberRegex = GetNumberRegex();
 
-    public static string? SolvePart1(IEnumerable<string> input)
-        => input.Sum(GetPoints).ToString();
+    public static int? SolvePart1(IEnumerable<string> input)
+        => input.Sum(GetPoints);
 
-    public static string? SolvePart2(IEnumerable<string> input)
+    public static int? SolvePart2(IEnumerable<string> input)
         => input.Select((line, index) => (Index: index, Matches: GetMatchCount(line)))
             .Aggregate(new Dictionary<int, int>(), UpdateCardCounts)
-            .Sum(p => p.Value)
-            .ToString();
+            .Sum(p => p.Value);
 
     private static Dictionary<int, int> UpdateCardCounts(Dictionary<int, int> cardCounts, (int Index, int Matches) card)
     {

@@ -17,7 +17,7 @@ public class Day02
 
         var result = AdventOfCode2023.Day02.SolvePart1(input);
 
-        Assert.AreEqual("1", result);
+        Assert.AreEqual(1, result);
     }
 
     [TestMethod]
@@ -27,7 +27,7 @@ public class Day02
 
         var result = AdventOfCode2023.Day02.SolvePart1(input);
 
-        Assert.AreEqual("8", result);
+        Assert.AreEqual(8, result);
     }
 
     [TestMethod]
@@ -37,7 +37,7 @@ public class Day02
 
         var result = AdventOfCode2023.Day02.SolvePart1(input);
 
-        Assert.AreEqual("1853", result);
+        Assert.AreEqual(1853, result);
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ public class Day02
 
         var result = AdventOfCode2023.Day02.SolvePart2(input);
 
-        Assert.AreEqual("2286", result);
+        Assert.AreEqual(2286, result);
     }
 
     [TestMethod]
@@ -57,6 +57,6 @@ public class Day02
 
         var result = AdventOfCode2023.Day02.SolvePart2(input);
 
-        Assert.AreEqual("72706", result);
+        Assert.AreEqual(72706, result);
     }
 }

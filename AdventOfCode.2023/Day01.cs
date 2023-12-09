@@ -8,11 +8,10 @@ public partial class Day01
 {
     private static Regex DigitRegex = MyRegex();
 
-    public static string? Solve(string input)
+    public static int? Solve(string input)
         => input.Split("\n")
             .Select(line => int.Parse(string.Join("", Filter(DigitRegex.Matches(line).Select(m => m.ToString())))))
-            .Sum()
-            .ToString();
+            .Sum();
 
     public static IEnumerable<string> Filter(IEnumerable<string> source)
     {

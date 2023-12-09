@@ -39,7 +39,7 @@ public partial class Day05
             => new(this.Source.GetRight(rightLength), this.Destination.GetRight(rightLength));
     }
 
-    public static string? SolvePart1(IEnumerable<string> input)
+    public static Big? SolvePart1(IEnumerable<string> input)
     {
         var enumerator = input.GetEnumerator();
         enumerator.MoveNext();
@@ -47,10 +47,10 @@ public partial class Day05
         var seeds = NumberRegex.Matches(enumerator.Current).Select(m => Big.Parse(m.Value)).ToArray();
         var getLocation = GetLocationMethod(enumerator);
 
-        return seeds.Min(getLocation).ToString();
+        return seeds.Min(getLocation);
     }
 
-    public static string? SolvePart2(IEnumerable<string> input)
+    public static Big? SolvePart2(IEnumerable<string> input)
     {
         var enumerator = input.GetEnumerator();
         enumerator.MoveNext();
@@ -93,7 +93,7 @@ public partial class Day05
         var humidityToLocationMap = GetMap(enumerator);
         result = Apply(result, humidityToLocationMap);
 
-        return result.Min(m => m.Destination.Start).ToString();
+        return result.Min(m => m.Destination.Start);
     }
 
     public static Range? GetIntersection(Range range1, Range range2)

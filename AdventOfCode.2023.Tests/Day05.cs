@@ -20,7 +20,7 @@ public class Day05
 
         var result = SolvePart1(input);
 
-        Assert.AreEqual("35", result);
+        Assert.AreEqual(35, result);
     }
 
     [TestMethod]
@@ -30,7 +30,7 @@ public class Day05
 
         var result = SolvePart1(input);
 
-        Assert.AreEqual("227653707", result);
+        Assert.AreEqual(227653707, result);
     }
 
     [TestMethod]
@@ -186,7 +186,7 @@ public class Day05
 
         var result = SolvePart2(input);
 
-        Assert.AreEqual("46", result);
+        Assert.AreEqual(46, result);
     }
 
     [TestMethod]
@@ -196,6 +196,6 @@ public class Day05
 
         var result = SolvePart2(input);
 
-        Assert.AreEqual("78775051", result);
+        Assert.AreEqual(78775051, result);
     }
 }
