@@ -3,12 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
-public partial class Day04
+public partial class Day04 : Solution
 {
-    private static Regex NumberRegex = GetNumberRegex();
-
     public static int? SolvePart1(IEnumerable<string> input)
         => input.Sum(GetPoints);
 
@@ -49,7 +46,4 @@ public partial class Day04
         var mine = NumberRegex.Matches(parts[1]).Select(m => m.Value).ToList();
         return mine.Count(winning.Contains);
     }
-
-    [GeneratedRegex(@"(\d+)")]
-    private static partial Regex GetNumberRegex();
 }

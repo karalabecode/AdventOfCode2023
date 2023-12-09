@@ -5,14 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using static System.Linq.Expressions.Expression;
-using System.Text.RegularExpressions;
-
 using Big = System.Numerics.BigInteger;
 
-public partial class Day05
+public class Day05 : Solution
 {
-    public static Regex NumberRegex = GetNumberRegex();
-
     public readonly record struct Range(Big Start, Big End)
     {
         public Big Length => this.End - this.Start + 1;
@@ -44,7 +40,7 @@ public partial class Day05
         var enumerator = input.GetEnumerator();
         enumerator.MoveNext();
 
-        var seeds = NumberRegex.Matches(enumerator.Current).Select(m => Big.Parse(m.Value)).ToArray();
+        var seeds = ParseNumbers(enumerator.Current, Big.Parse).ToArray();
         var getLocation = GetLocationMethod(enumerator);
 
         return seeds.Min(getLocation);
@@ -55,7 +51,7 @@ public partial class Day05
         var enumerator = input.GetEnumerator();
         enumerator.MoveNext();
 
-        var seedRanges = NumberRegex.Matches(enumerator.Current).Select(m => Big.Parse(m.Value)).ToArray();
+        var seedRanges = ParseNumbers(enumerator.Current, Big.Parse).ToArray();
         var result = GetInitialMappings(seedRanges).ToList();
 
         SkipUntilNext(enumerator);
@@ -239,7 +235,7 @@ public partial class Day05
 
         while (enumerator.MoveNext() && !string.IsNullOrWhiteSpace(enumerator.Current))
         {
-            var numbers = NumberRegex.Matches(enumerator.Current).Select(m => Big.Parse(m.Value)).ToArray();
+            var numbers = ParseNumbers(enumerator.Current, Big.Parse).ToArray();
 
             result.Add(new Mapping(Range.FromStartLength(numbers[1], numbers[2]), Range.FromStartLength(numbers[0], numbers[2])));
         }
@@ -252,7 +248,4 @@ public partial class Day05
             .FirstOrDefault(mapping => i >= mapping!.Value.Source.Start && i < mapping.Value.Source.Start + mapping.Value.Length) is Mapping m
             ? m.Destination.Start + i - m.Source.Start
             : i;
-
-    [GeneratedRegex(@"(\d+)")]
-    public static partial Regex GetNumberRegex();
 }
