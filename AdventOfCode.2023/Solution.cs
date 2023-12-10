@@ -9,8 +9,8 @@ public partial class Solution
 {
     public static Regex NumberRegex = GetNumberRegex();
 
-    public static IEnumerable<T> ParseNumbers<T>(string input, Func<string, T> parse) => NumberRegex.Matches(input).Select(m => parse(m.Value)).ToArray();
+    public static IEnumerable<T> ParseNumbers<T>(string input, Func<string, T> parse) => NumberRegex.Matches(input).Select(m => parse(m.Value));
 
-    [GeneratedRegex(@"(\d+)")]
+    [GeneratedRegex(@"(-?\d+)")]
     public static partial Regex GetNumberRegex();
 }

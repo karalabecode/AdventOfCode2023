@@ -5,20 +5,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 
+using static AdventOfCode2023.Day09;
+
 [TestClass]
-public class Day03
+public class Day09
 {
-    static readonly IEnumerable<string> TestInput = File.ReadLines("Inputs/Day03.Example.txt");
-    static readonly IEnumerable<string> RealInput = File.ReadLines("Inputs/Day03.txt");
+    static readonly IEnumerable<string> TestInput = File.ReadLines("Inputs/Day09.Example.txt");
+    static readonly IEnumerable<string> RealInput = File.ReadLines("Inputs/Day09.txt");
 
     [TestMethod]
     public void SolvePart1_ForWholeTestInput_ReturnsCorrectResult()
     {
         var input = TestInput;
 
-        var result = AdventOfCode2023.Day03.SolvePart1(input);
+        var result = SolvePart1(input);
 
-        Assert.AreEqual(4361, result);
+        Assert.AreEqual(114, result);
     }
 
     [TestMethod]
@@ -26,9 +28,9 @@ public class Day03
     {
         var input = RealInput;
 
-        var result = AdventOfCode2023.Day03.SolvePart1(input);
+        var result = SolvePart1(input);
 
-        Assert.AreEqual(526634, result);
+        Assert.AreEqual(1898776583, result);
     }
 
     [TestMethod]
@@ -36,9 +38,9 @@ public class Day03
     {
         var input = TestInput;
 
-        var result = AdventOfCode2023.Day03.SolvePart2(input);
+        var result = SolvePart2(input);
 
-        Assert.AreEqual(467835, result);
+        Assert.AreEqual(2, result);
     }
 
     [TestMethod]
@@ -46,8 +48,8 @@ public class Day03
     {
         var input = RealInput;
 
-        var result = AdventOfCode2023.Day03.SolvePart2(input);
+        var result = SolvePart2(input);
 
-        Assert.AreEqual(73646890, result);
+        Assert.AreEqual(1100, result);
     }
 }
