@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-public readonly record struct Symbol(int Line, int Char, char SymbolChar);
-public readonly record struct Number(int Line, int Char, int Length, int Value);
-
 public partial class Day03 : Solution
 {
+    public readonly record struct Symbol(int Line, int Char, char SymbolChar);
+    public readonly record struct Number(int Line, int Char, int Length, int Value);
+
     private static Regex SymbolRegex = GetSymbolRegex();
 
     public static int? SolvePart1(IEnumerable<string> input) => GetPartNumbers(input).Select(n => n.Value).Sum();

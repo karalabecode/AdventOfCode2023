@@ -5,53 +5,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using static System.Linq.Expressions.Expression;
-using Big = System.Numerics.BigInteger;
+using Number = long;
 
 public class Day05 : Solution
 {
-    public readonly record struct Range(Big Start, Big End)
+    public readonly record struct Range(Number Start, Number End)
     {
-        public Big Length => this.End - this.Start + 1;
+        public Number Length => this.End - this.Start + 1;
 
-        public static Range FromStartLength(Big start, Big length) => new(start, start + length - 1);
+        public static Range FromStartLength(Number start, Number length) => new(start, start + length - 1);
 
-        public Range GetLeft(Big leftLength) => FromStartLength(this.Start, leftLength);
-        public Range GetRight(Big rightLength) => FromStartLength(this.End - rightLength + 1, rightLength);
-        public Range GetInner(Big leftLength, Big rightLength) => new(this.Start + leftLength, this.End - rightLength);
+        public Range GetLeft(Number leftLength) => FromStartLength(this.Start, leftLength);
+        public Range GetRight(Number rightLength) => FromStartLength(this.End - rightLength + 1, rightLength);
+        public Range GetInner(Number leftLength, Number rightLength) => new(this.Start + leftLength, this.End - rightLength);
     }
 
     public readonly record struct Mapping(Range Source, Range Destination)
     {
-        public Mapping(Big destinationStart, Big sourceStart, Big length) : this(Range.FromStartLength(sourceStart, length), Range.FromStartLength(destinationStart, length)) { }
+        public Mapping(Number destinationStart, Number sourceStart, Number length) : this(Range.FromStartLength(sourceStart, length), Range.FromStartLength(destinationStart, length)) { }
 
-        public Big Length => this.Source.Length;
+        public Number Length => this.Source.Length;
 
         public static implicit operator Mapping(Range range) => new(range, range);
 
-        public Mapping GetLeft(Big leftLength)
+        public Mapping GetLeft(Number leftLength)
             => new(this.Source.GetLeft(leftLength), this.Destination.GetLeft(leftLength));
 
-        public Mapping GetRight(Big rightLength)
+        public Mapping GetRight(Number rightLength)
             => new(this.Source.GetRight(rightLength), this.Destination.GetRight(rightLength));
     }
 
-    public static Big? SolvePart1(IEnumerable<string> input)
+    public static Number? SolvePart1(IEnumerable<string> input)
     {
         var enumerator = input.GetEnumerator();
         enumerator.MoveNext();
 
-        var seeds = ParseNumbers(enumerator.Current, Big.Parse).ToArray();
+        var seeds = ParseNumbers(enumerator.Current, Number.Parse).ToArray();
         var getLocation = GetLocationMethod(enumerator);
 
         return seeds.Min(getLocation);
     }
 
-    public static Big? SolvePart2(IEnumerable<string> input)
+    public static Number? SolvePart2(IEnumerable<string> input)
     {
         var enumerator = input.GetEnumerator();
         enumerator.MoveNext();
 
-        var seedRanges = ParseNumbers(enumerator.Current, Big.Parse).ToArray();
+        var seedRanges = ParseNumbers(enumerator.Current, Number.Parse).ToArray();
         var result = GetInitialMappings(seedRanges).ToList();
 
         SkipUntilNext(enumerator);
@@ -150,13 +150,13 @@ public class Day05 : Solution
         return result;
     }
 
-    public static IEnumerable<Mapping> GetInitialMappings(Big[] seedRanges)
+    public static IEnumerable<Mapping> GetInitialMappings(Number[] seedRanges)
         => Enumerable.Range(0, seedRanges.Length / 2)
             .Select(i => (Mapping)Range.FromStartLength(seedRanges[i * 2], seedRanges[i * 2 + 1]));
 
-    public static Func<Big, Big> GetLocationMethod(IEnumerator<string> enumerator)
+    public static Func<Number, Number> GetLocationMethod(IEnumerator<string> enumerator)
     {
-        var arg = Parameter(typeof(Big), "i");
+        var arg = Parameter(typeof(Number), "i");
 
         SkipUntilNext(enumerator);
 
@@ -209,8 +209,8 @@ public class Day05 : Solution
                                 seedToSoil(i)))))));
     }
 
-    public static Expression<Func<Big, Big>> CreateExpression(ParameterExpression arg, List<Mapping> map)
-        => (Expression<Func<Big, Big>>)Lambda(map.Aggregate((Expression)arg, (prev, mapping) =>
+    public static Expression<Func<Number, Number>> CreateExpression(ParameterExpression arg, List<Mapping> map)
+        => (Expression<Func<Number, Number>>)Lambda(map.Aggregate((Expression)arg, (prev, mapping) =>
             Condition
             (
                 test: And
@@ -235,7 +235,7 @@ public class Day05 : Solution
 
         while (enumerator.MoveNext() && !string.IsNullOrWhiteSpace(enumerator.Current))
         {
-            var numbers = ParseNumbers(enumerator.Current, Big.Parse).ToArray();
+            var numbers = ParseNumbers(enumerator.Current, Number.Parse).ToArray();
 
             result.Add(new Mapping(Range.FromStartLength(numbers[1], numbers[2]), Range.FromStartLength(numbers[0], numbers[2])));
         }
@@ -243,7 +243,7 @@ public class Day05 : Solution
         return result;
     }
 
-    public static Func<Big, Big> GetFunc(List<Mapping> map)
+    public static Func<Number, Number> GetFunc(List<Mapping> map)
         => i => map.Select(m => (Mapping?)m)
             .FirstOrDefault(mapping => i >= mapping!.Value.Source.Start && i < mapping.Value.Source.Start + mapping.Value.Length) is Mapping m
             ? m.Destination.Start + i - m.Source.Start

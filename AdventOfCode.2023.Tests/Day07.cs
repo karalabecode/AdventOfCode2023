@@ -40,7 +40,7 @@ public class Day07
 
         var result = SolvePart2(input);
 
-        Assert.AreEqual(5905ul, result);
+        Assert.AreEqual(5905L, result);
     }
 
     [TestMethod]
@@ -50,6 +50,6 @@ public class Day07
 
         var result = SolvePart2(input);
 
-        Assert.AreEqual(248029057ul, result);
+        Assert.AreEqual(248029057L, result);
     }
 }

@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-using Big = System.Numerics.BigInteger;
+using Number = long;
 
 public partial class Day07 : Solution
 {
-    public static int? SolvePart1(IEnumerable<string> input) => input.Select(Parse).Order(new HandComparer()).Select((h, i) => (i + 1) * h.Bid).Aggregate((a, b) => a + b);
+    public static int? SolvePart1(IEnumerable<string> input) => input.Select(Parse).Order(new HandComparer()).Select((h, i) => (i + 1) * h.Bid).Sum();
 
-    public static Big? SolvePart2(IEnumerable<string> input) => input.Select(Parse2).Order(new HandComparer2()).Select((h, i) => ((Big)i + 1) * h.Bid).Aggregate((a, b) => a + b);
+    public static Number? SolvePart2(IEnumerable<string> input) => input.Select(Parse2).Order(new HandComparer2()).Select((h, i) => ((Number)i + 1) * h.Bid).Sum();
 
     public static Hand Parse(string line)
     {

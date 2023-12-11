@@ -1,4 +1,11 @@
 ﻿[*.cs]
 
+# IDE0065: 'using' directive placement
+csharp_using_directive_placement = inside_namespace
+dotnet_diagnostic.IDE0065.severity = error
+
 # CA1051: Do not declare visible instance fields
 dotnet_diagnostic.CA1051.severity = none
+
+# IDE0005: Using directive is unnecessary
+dotnet_diagnostic.IDE0005.severity = error

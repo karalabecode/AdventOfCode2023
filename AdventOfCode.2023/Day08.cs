@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using Big = System.Numerics.BigInteger;
+using Number = long;
 
 public partial class Day08 : Solution
 {
@@ -29,7 +29,7 @@ public partial class Day08 : Solution
         return s;
     }
 
-    static Big GCF(Big a, Big b)
+    static Number GCF(Number a, Number b)
     {
         while (b != 0)
         {
@@ -40,12 +40,12 @@ public partial class Day08 : Solution
         return a;
     }
 
-    static Big LCM(Big a, Big b)
+    static Number LCM(Number a, Number b)
     {
-        return (a / GCF(a, b)) * b;
+        return a / GCF(a, b) * b;
     }
 
-    public static Big? SolvePart2(IEnumerable<string> input)
+    public static Number? SolvePart2(IEnumerable<string> input)
     {
         var steps = input.First();
 
@@ -81,7 +81,7 @@ public partial class Day08 : Solution
             }
         }
 
-        return touchMap.Select(i => (Big)i).Aggregate((Big)1, LCM);
+        return touchMap.Select(i => (Number)i).Aggregate((Number)1, LCM);
     }
 
     private static (string, string, string) ParseTransition(string line)

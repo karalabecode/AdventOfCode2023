@@ -1,10 +1,8 @@
-﻿using static AdventOfCode2023.Day10;
-
-namespace AdventOfCode2023;
+﻿namespace AdventOfCode2023;
+using static AdventOfCode2023.Day10;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 using static Day10.Tile;

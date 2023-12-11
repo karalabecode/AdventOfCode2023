@@ -2,7 +2,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using System.Collections.Generic;
 using System.IO;
 
 using static AdventOfCode2023.Day11;
@@ -10,8 +9,8 @@ using static AdventOfCode2023.Day11;
 [TestClass]
 public class Day11
 {
-    static readonly IEnumerable<string> TestInput = File.ReadLines("Inputs/Day11.Example.txt");
-    static readonly IEnumerable<string> RealInput = File.ReadLines("Inputs/Day11.txt");
+    static readonly string TestInput = File.ReadAllText("Inputs/Day11.Example.txt");
+    static readonly string RealInput = File.ReadAllText("Inputs/Day11.txt");
 
     [TestMethod]
     public void SolvePart1_ForWholeTestInput_ReturnsCorrectResult()
@@ -50,6 +49,6 @@ public class Day11
 
         var result = SolvePart2(input);
 
-        Assert.AreEqual(827009909817, result);
+        Assert.AreEqual(827009909817L, result);
     }
 }

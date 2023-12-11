@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Collections.Generic;
 using System.IO;
-using System.Numerics;
 
 using static AdventOfCode2023.Day08;
 
@@ -63,6 +62,6 @@ public class Day08
 
         var result = SolvePart2(input);
 
-        Assert.AreEqual(BigInteger.Parse("16187743689077"), result);
+        Assert.AreEqual(16187743689077L, result);
     }
 }
