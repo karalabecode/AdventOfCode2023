@@ -18,8 +18,6 @@ public partial class Day10 : Solution
     {
         var (start, map) = Parse(input.ToArray());
 
-        Print(WidenMap(SimplifyMap(start, map)));
-
         return GetMaxDistance(start, map);
     }
 
@@ -54,8 +52,6 @@ public partial class Day10 : Solution
                 foreach (var p in nextSet) innerPositions.Add(p);
             }
         }
-
-        Print(wide, innerPositions, outerPositions);
 
         return innerPositions.Count(p => p.Y % 2 == 0 && p.X % 2 == 0);
     }
@@ -124,31 +120,6 @@ public partial class Day10 : Solution
         }
 
         return result;
-    }
-
-    public static void Print(Map map, HashSet<Position>? innerSet = null, HashSet<Position>? outerSet = null)
-    {
-        for (var i = 0; i < map.GetLength(0); i++)
-        {
-            for (var j = 0; j < map.GetLength(1); j++)
-            {
-                Debug.Write(map[i, j] switch
-                {
-                    H => '─',
-                    V => '│',
-
-                    BR => '┌',
-                    BL => '┐',
-                    TR => '└',
-                    TL => '┘',
-
-                    Start => 'S',
-                    _ => innerSet?.Contains((i, j)) ?? false ? 'I' : outerSet?.Contains((i, j)) ?? false ? 'O' : '.'
-                });
-            }
-
-            Debug.WriteLine("");
-        }
     }
 
     static Tile Next(Tile from, Tile to) => to & (~(from switch { Top => Bottom, Bottom => Top, Right => Left, _ => Right, }));
